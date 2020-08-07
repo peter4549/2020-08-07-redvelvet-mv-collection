@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">RedVelvet MV Collection</string>
+
+    <string name="ad_mob_app_id">ca-app-pub-2713759975650849~6488378033</string>
+    <string name="banner_ad_unit_id">ca-app-pub-2713759975650849/3468722207</string>
+
+    <string name="failed_to_load_videos">비디오를 불러오는데 실패했습니다.</string>
+
+    <string name="thumbnail">Thumbnail</string>
+    <string name="background_image">Background image</string>
+    <string name="auto_play_start">자동 재생 시작</string>
+    <string name="watchlist">관심 목록</string>
+    <string name="favorite">Favorite</string>
+    <string name="no_videos">추가된 비디오가 없습니다.</string>
+
+</resources>

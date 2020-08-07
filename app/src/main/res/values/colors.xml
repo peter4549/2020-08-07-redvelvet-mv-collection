@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#A0A0A0</color>
+    <color name="colorPrimaryDark">#A0A0A0</color>
+    <color name="colorAccent">#f06292</color>
+
+    <color name="colorBackgroundPink">#fce4ec</color>
+    <color name="colorToolbarPink">#f06292</color>
+    <color name="colorBackgroundYellow">#fffde7</color>
+</resources>
