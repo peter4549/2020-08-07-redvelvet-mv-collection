@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RedVelvet MV Collection</string>
+
+    <string name="ad_mob_app_id">ca-app-pub-2713759975650849~6488378033</string>
+    <string name="banner_ad_unit_id">ca-app-pub-2713759975650849/3468722207</string>
+
+    <string name="failed_to_load_videos">The video load failed</string>
+
+    <string name="thumbnail">Thumbnail</string>
+    <string name="background_image">Background image</string>
+    <string name="auto_play_start">Start automatic playback</string>
+    <string name="watchlist">Watchlist</string>
+    <string name="favorite">Favorite</string>
+    <string name="no_videos">No videos have been added.</string>
+    <string name="player_initialization_failure_message">Failed to initialize the player. Please update to the latest version of YouTube.</string>
+</resources>

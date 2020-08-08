@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RedVelvet MVコレクション</string>
+
+    <string name="ad_mob_app_id">ca-app-pub-2713759975650849~6488378033</string>
+    <string name="banner_ad_unit_id">ca-app-pub-2713759975650849/3468722207</string>
+
+    <string name="failed_to_load_videos">ビデオを呼んでくる失敗しました。</string>
+
+    <string name="thumbnail">Thumbnail</string>
+    <string name="background_image">Background image</string>
+    <string name="auto_play_start">自動再生を開始</string>
+    <string name="watchlist">ウォッチ・リスト</string>
+    <string name="favorite">Favorite</string>
+    <string name="no_videos">追加されたビデオがありません。</string>
+    <string name="player_initialization_failure_message">プレーヤーの初期化に失敗しました。 YouTubeの最新バージョンにアップデートしてください。</string>
+</resources>

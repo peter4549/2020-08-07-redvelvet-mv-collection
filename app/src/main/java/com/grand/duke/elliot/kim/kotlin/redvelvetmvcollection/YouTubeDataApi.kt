@@ -16,7 +16,7 @@ class YouTubeDataApi {
 
     fun getVideosRequestByIds(videoIds: String): Request {
         val url = "https://www.googleapis.com/youtube/v3/videos?" +
-                "key=$GOOGLE_API_KEY&part=snippet,statistics&id=$videoIds"
+                "key=$GOOGLE_API_KEY&part=snippet&id=$videoIds"
         return Request.Builder().url(url).get().build()
     }
 

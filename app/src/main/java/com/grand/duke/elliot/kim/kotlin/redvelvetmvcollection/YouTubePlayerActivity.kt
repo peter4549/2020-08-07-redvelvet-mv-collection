@@ -1,6 +1,7 @@
 package com.grand.duke.elliot.kim.kotlin.redvelvetmvcollection
 
 import android.os.Bundle
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.gms.ads.AdListener
@@ -15,6 +16,7 @@ import java.util.*
 
 class YouTubePlayerActivity : YouTubeBaseActivity() {
 
+    private var playOptions = -1
     private var videoId: String? = null
 
     private val drawableImageIds = arrayOf(
@@ -49,7 +51,13 @@ class YouTubePlayerActivity : YouTubeBaseActivity() {
         if (intent.action != MainActivity.ACTION_YOUTUBE_PLAYER)
             finish()
 
+        playOptions = intent.getIntExtra(MainActivity.KEY_PLAY_OPTIONS, -1)
         videoId = intent.getStringExtra(MainActivity.KEY_VIDEO_ID)
+        
+        if (playOptions == -1) {
+            Toast.makeText(this, "알 수 없는 오류가 발생했습니다.", Toast.LENGTH_LONG).show()
+            finish()
+        }
 
         Glide.with(image_view.context)
             .load(drawableImageId)
@@ -63,8 +71,14 @@ class YouTubePlayerActivity : YouTubeBaseActivity() {
                 player: YouTubePlayer?,
                 wasRestored: Boolean
             ) {
-                if (!wasRestored)
-                    player?.cueVideo(videoId)
+                if (!wasRestored) {
+                    when(playOptions) {
+                        MainActivity.PLAY_SINGLE_VIDEO -> player?.cueVideo(videoId)
+                        MainActivity.PLAY_ALL_VIDEOS -> player?.cueVideos(MainActivity.allVideos.map { it.id })
+                        MainActivity.PLAY_WATCHLIST_VIDEOS -> player?.cueVideos(MainActivity.favoriteVideoIds.toList())
+                    }
+                }
+                    
 
                 player?.setPlayerStateChangeListener(object : YouTubePlayer.PlayerStateChangeListener {
                     override fun onAdStarted() {  }
@@ -87,7 +101,10 @@ class YouTubePlayerActivity : YouTubeBaseActivity() {
             override fun onInitializationFailure(
                 provider: YouTubePlayer.Provider?,
                 result: YouTubeInitializationResult?
-            ) {  }
+            ) {
+                Toast.makeText(this@YouTubePlayerActivity,
+                    getString(R.string.player_initialization_failure_message), Toast.LENGTH_LONG).show()
+            }
 
         })
 

@@ -28,7 +28,6 @@ import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var favoriteVideoIds: MutableSet<String>
     private lateinit var recyclerViewAdapter: RecyclerViewAdapter
     private lateinit var youtubeDataApi: YouTubeDataApi
 
@@ -44,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         youtubeDataApi = YouTubeDataApi()
 
-        recyclerViewAdapter = RecyclerViewAdapter(null, favoriteVideoIds)
+        recyclerViewAdapter = RecyclerViewAdapter(this, null, favoriteVideoIds)
         recycler_view.apply {
             adapter = recyclerViewAdapter
             layoutManager = GridLayoutManagerWrapper(this@MainActivity, 1)
@@ -86,19 +85,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.item_auto_play -> {  }
+            R.id.item_auto_play -> startYouTubePlayerActivity(this, null, PLAY_ALL_VIDEOS)
             R.id.item_watchlist -> startFavoriteVideosFragment(favoriteVideoIds)
-            else -> {  }
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    private fun startYouTubePlayerActivity(videoId: String) {
-        val intent = Intent(this, YouTubePlayerActivity::class.java)
+    fun startYouTubePlayerActivity(context: Context, videoId: String?, playOptions: Int) {
+        val intent = Intent(context, YouTubePlayerActivity::class.java)
         intent.action = ACTION_YOUTUBE_PLAYER
+        intent.putExtra(KEY_PLAY_OPTIONS, playOptions)
         intent.putExtra(KEY_VIDEO_ID, videoId)
-        startActivity(intent)
+        context.startActivity(intent)
     }
 
     private fun startFavoriteVideosFragment(favoriteVideoIds: Set<String>) {
@@ -128,7 +127,8 @@ class MainActivity : AppCompatActivity() {
         Context.MODE_PRIVATE).getStringSet(KEY_FAVORITE_VIDEO_IDS, mutableSetOf())?.toMutableSet() ?: mutableSetOf()
 
 
-    inner class RecyclerViewAdapter(private val favoriteVideos: List<VideoModel>? = null,
+    inner class RecyclerViewAdapter(private val context: Context,
+                                    private val favoriteVideos: List<VideoModel>? = null,
                                     private val favoriteVideoIds: MutableSet<String>)
         : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
@@ -178,7 +178,7 @@ class MainActivity : AppCompatActivity() {
             view.text_view_title.text = video.title
 
             view.setOnClickListener {
-                startYouTubePlayerActivity(video.id)
+                startYouTubePlayerActivity(context, video.id, PLAY_SINGLE_VIDEO)
             }
 
             view.image_view_favorite.setImageResource(if (favoriteVideoIds.contains(video.id))
@@ -202,6 +202,7 @@ class MainActivity : AppCompatActivity() {
             okHttpClient.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     showToast(getString(R.string.failed_to_load_videos))
+                    println("LLLLLLLLLLLL")
                     e.printStackTrace()
                 }
 
@@ -212,14 +213,19 @@ class MainActivity : AppCompatActivity() {
                                     youtubeDataApi.getVideoIdsFromResponse(response)
                             if (videoIds != null)
                                 setVideosByIds(videoIds.joinToString(separator = ","))
-                            else
+                            else {
                                 showToast(getString(R.string.failed_to_load_videos))
+                                println("AAAAAAAAAAAA")
+                            }
                         } catch (e: Exception) {
                             showToast(getString(R.string.failed_to_load_videos))
                             e.printStackTrace()
                         }
-                    } else
+                    } else {
                         showToast(getString(R.string.failed_to_load_videos))
+                        println("SSSSSSSSS")
+                        println("${response.body?.string()}")
+                    }
                 }
             })
         }
@@ -237,7 +243,7 @@ class MainActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         try {
                             this@RecyclerViewAdapter.videos = youtubeDataApi.getVideosFromResponse(response)
-                            allVideos = videos.toSet()
+                            allVideos = videos as ArrayList<VideoModel>
                             CoroutineScope(Dispatchers.Main).launch {
                                 notifyDataSetChanged()
                                 recyclerView.scheduleLayoutAnimation()
@@ -275,7 +281,13 @@ class MainActivity : AppCompatActivity() {
 
         const val ACTION_YOUTUBE_PLAYER = "main.activity.action.youtube.player"
         const val KEY_VIDEO_ID = "key_video_id"
+        const val KEY_PLAY_OPTIONS = "key_play_options"
+        
+        const val PLAY_SINGLE_VIDEO = 0
+        const val PLAY_ALL_VIDEOS = 1
+        const val PLAY_WATCHLIST_VIDEOS = 2
 
-        var allVideos = setOf<VideoModel>()
+        var allVideos = ArrayList<VideoModel>()
+        var favoriteVideoIds = mutableSetOf<String>()
     }
 }
