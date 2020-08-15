@@ -13,5 +13,9 @@
     <string name="favorite">Favorite</string>
     <string name="no_videos">추가된 비디오가 없습니다.</string>
     <string name="player_initialization_failure_message">플레이어 초기화에 실패했습니다. 유튜브를 최신 버전으로 업데이트 하십시오.</string>
+    <string name="exit_the_application">애플리케이션 종료</string>
+    <string name="ok">확인</string>
+    <string name="notification">알림</string>
+    <string name="cancel">취소</string>
 
 </resources>

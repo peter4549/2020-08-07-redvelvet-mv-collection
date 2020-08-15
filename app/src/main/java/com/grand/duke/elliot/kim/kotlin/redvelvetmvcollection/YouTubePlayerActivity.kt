@@ -19,6 +19,7 @@ class YouTubePlayerActivity : YouTubeBaseActivity() {
     private var playOptions = -1
     private var videoId: String? = null
 
+    /*
     private val drawableImageIds = arrayOf(
         R.drawable.irene_00,
         R.drawable.irene_01,
@@ -41,12 +42,13 @@ class YouTubePlayerActivity : YouTubeBaseActivity() {
         R.drawable.yeri_02,
         R.drawable.yeri_03
     )
+     */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_you_tube_player)
 
-        val drawableImageId = drawableImageIds[Random().nextInt(drawableImageIds.count())]
+        // val drawableImageId = drawableImageIds[Random().nextInt(drawableImageIds.count())]
 
         if (intent.action != MainActivity.ACTION_YOUTUBE_PLAYER)
             finish()
@@ -59,11 +61,13 @@ class YouTubePlayerActivity : YouTubeBaseActivity() {
             finish()
         }
 
+        /*
         Glide.with(image_view.context)
             .load(drawableImageId)
             .error(R.drawable.ic_sentiment_dissatisfied_grey_32dp)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(image_view)
+         */
 
         youtube_player_view.initialize(TAG, object : YouTubePlayer.OnInitializedListener {
             override fun onInitializationSuccess(
@@ -74,7 +78,7 @@ class YouTubePlayerActivity : YouTubeBaseActivity() {
                 if (!wasRestored) {
                     when(playOptions) {
                         MainActivity.PLAY_SINGLE_VIDEO -> player?.cueVideo(videoId)
-                        MainActivity.PLAY_ALL_VIDEOS -> player?.cueVideos(MainActivity.allVideos.map { it.id })
+                        MainActivity.PLAY_ALL_VIDEOS -> player?.cueVideos(MainActivity.allVideos.map { it.id }.toList())
                         MainActivity.PLAY_WATCHLIST_VIDEOS -> player?.cueVideos(MainActivity.favoriteVideoIds.toList())
                     }
                 }
@@ -107,23 +111,6 @@ class YouTubePlayerActivity : YouTubeBaseActivity() {
             }
 
         })
-
-        MobileAds.initialize(this)
-        ad_view.loadAd(AdRequest.Builder().build())
-        val adListener = object : AdListener() {
-            @Suppress("DEPRECATION")
-            override fun onAdFailedToLoad(p0: Int) {
-                println("$TAG: onAdFailedToLoad")
-                super.onAdFailedToLoad(p0)
-            }
-
-            override fun onAdLoaded() {
-                super.onAdLoaded()
-                println("$TAG: onAdLoaded")
-            }
-        }
-
-        ad_view.adListener = adListener
     }
 
     companion object {

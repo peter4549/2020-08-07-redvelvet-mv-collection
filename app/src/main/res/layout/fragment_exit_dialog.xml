@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/colorBackgroundPink">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="14dp"
+        android:fontFamily="@font/font_family_tmoney_round_wind_extra_bold"
+        android:text="@string/exit_the_application"
+        android:textSize="16sp"/>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ad_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ads:adSize="MEDIUM_RECTANGLE"
+        ads:adUnitId="@string/banner_ad_unit_id"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:background="@color/colorToolbarPink">
+
+        <Button
+            android:id="@+id/button_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="8dp"
+            android:background="@color/colorToolbarPink"
+            android:fontFamily="@font/font_family_tmoney_round_wind_extra_bold"
+            android:text="@string/ok"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"/>
+
+    </FrameLayout>
+
+</LinearLayout>

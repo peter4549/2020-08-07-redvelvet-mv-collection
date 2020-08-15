@@ -14,4 +14,8 @@
     <string name="favorite">Favorite</string>
     <string name="no_videos">追加されたビデオがありません。</string>
     <string name="player_initialization_failure_message">プレーヤーの初期化に失敗しました。 YouTubeの最新バージョンにアップデートしてください。</string>
+    <string name="exit_the_application">アプリを終了します</string>
+    <string name="ok">OK</string>
+    <string name="notification">通知</string>
+    <string name="cancel">Cancel</string>
 </resources>

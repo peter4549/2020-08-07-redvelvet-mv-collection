@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>version_update</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>quit_when_not_updating</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>update_message</key>
+        <value>Update Message</value>
+    </entry>
+    <entry>
+        <key>download_link</key>
+        <value>Download Link</value>
+    </entry>
+    <entry>
+        <key>data_update</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>version_name</key>
+        <value>1.0</value>
+    </entry>
+</defaultsMap>

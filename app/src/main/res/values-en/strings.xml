@@ -14,4 +14,8 @@
     <string name="favorite">Favorite</string>
     <string name="no_videos">No videos have been added.</string>
     <string name="player_initialization_failure_message">Failed to initialize the player. Please update to the latest version of YouTube.</string>
+    <string name="exit_the_application">Exit the application</string>
+    <string name="ok">OK</string>
+    <string name="notification">Notification</string>
+    <string name="cancel">Cancel</string>
 </resources>
